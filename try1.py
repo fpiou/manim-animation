@@ -3,8 +3,8 @@
 from manimlib.imports import *
 
 # To watch one of these scenes, run the following:
-# py -m manim try1.py coordonnees2 -pl
-#
+# cd C:\Users\User\Documents\MEGA\MEGAsync\COURS\preparation annee 2017\manim
+# py -m manim try1.py nomdelaclass -pl
 # Use the flat -l for a faster rendering at a lower
 # quality.
 # Use -s to skip to the end and just save the final frame
@@ -13,6 +13,54 @@ from manimlib.imports import *
 # Use -n <number> to skip ahead to the n'th animation of a scene.
 # Use -r <number> to specify a resolution (for example, -r 1080
 # for a 1920x1080 video)
+
+class axesavecfleche(GraphScene):
+    CONFIG = {
+        "x_min": -6,
+        "x_max": 6,
+        "x_axis_width": 9,
+        "x_tick_frequency": 1,
+        "x_leftmost_tick": None,  # Change if different from x_min
+        "x_labeled_nums": [1],
+        "x_axis_label": "",
+        "y_min": -4,
+        "y_max": 4,
+        "y_axis_height": 6,
+        "y_tick_frequency": 1,
+        "y_bottom_tick": None,  # Change if different from y_min
+        "y_labeled_nums": [1],
+        "y_axis_label": "",
+        "axes_color": BLUE,
+        "graph_origin": 0 * DOWN + 0 * LEFT,
+        "exclude_zero_label": False,
+        "default_graph_colors": [BLUE, GREEN, YELLOW],
+        "default_derivative_color": GREEN,
+        "default_input_color": YELLOW,
+        "default_riemann_start_color": BLUE,
+        "default_riemann_end_color": GREEN,
+        "area_opacity": 0.8,
+        "num_rects": 50,
+    }
+    def construct(self):
+        self.setup_axes(animate=True)
+        A=self.coords_to_point(-3,-2)
+        B=self.coords_to_point(0,0)
+        fleche=CurvedArrow(A,B)
+        textorigin=TextMobject("Origine").next_to(A,LEFT,SMALL_BUFF)
+        coordOrigin=TexMobject("O(0{;}0)").next_to(textorigin,BOTTOM,buff=0.01)
+        A=self.coords_to_point(0,4)
+        B=self.coords_to_point(5,0)
+        textaxex=TextMobject("Axe des ordonnées").next_to(A,LEFT,SMALL_BUFF)
+        textaxey=TextMobject("Axe des abscisses").next_to(B,DOWN,SMALL_BUFF)
+        A=self.coords_to_point(3,2.5)
+        titre1=TextMobject("Repérage").next_to(A)
+        titre2=TextMobject("dans le plan").next_to(titre1,BOTTOM,buff=0.01)
+        titre=VGroup(titre1,titre2)
+        cadre=SurroundingRectangle(titre, buff = .1).set_color(RED)
+        self.play(Write(fleche),Write(textorigin),Write(coordOrigin),Write(textaxex),Write(textaxey),Write(titre),ShowCreation(cadre))
+        self.wait()
+
+
 
 class coordonnees2(GraphScene):
     CONFIG = {
@@ -43,13 +91,20 @@ class coordonnees2(GraphScene):
     }
     def construct(self):
         self.setup_axes(animate=True)
+        A=self.coords_to_point(0,-4)
+        B=self.coords_to_point(0,4)
+        axex=Arrow(A,B,buff=0).set_color(BLUE)
+        A=self.coords_to_point(-6,0)
+        B=self.coords_to_point(6,0)
+        axey=Arrow(A,B,buff=0).set_color(BLUE)
+        self.add(axex,axey)
         labelO=TexMobject("O")
         O=DotCross(self,0,0)
         labelO.next_to(O,DL,buff=0.05)
         self.add(labelO)
         x=3
         y=2
-        labelM=TexMobject("M","(",str(x),";",str(y),")")
+        labelM=TexMobject("M","(",str(x),"{;}",str(y),")")
         parentheses=VGroup(labelM[1],labelM[3],labelM[5])
         labelM[2].set_color(YELLOW)
         labelM[4].set_color(YELLOW)
@@ -96,7 +151,7 @@ class coordonnees2(GraphScene):
         self.wait()
         x=-4
         y=2
-        labelN=TexMobject("M","(",str(x),";",str(y),")")
+        labelN=TexMobject("M","(",str(x),"{;}",str(y),")")
         labelN[2].set_color(YELLOW)
         labelN[4].set_color(YELLOW)
         N=DotCross(self,x,y)
@@ -128,7 +183,7 @@ class coordonnees2(GraphScene):
         self.wait()
         x=5
         y=-3
-        labelO=TexMobject("M","(",str(x),";",str(y),")")
+        labelO=TexMobject("M","(",str(x),"{;}",str(y),")")
         parentheses=VGroup(labelO[1],labelO[3],labelO[5])
         labelO[2].set_color(YELLOW)
         labelO[4].set_color(YELLOW)
@@ -162,7 +217,7 @@ class coordonnees2(GraphScene):
         self.wait()
         x=5
         y=-2
-        labelN=TexMobject("M","(",str(x),";",str(y),")")
+        labelN=TexMobject("M","(",str(x),"{;}",str(y),")")
         labelN[2].set_color(YELLOW)
         labelN[4].set_color(YELLOW)
         N=DotCross(self,x,y)
@@ -188,7 +243,7 @@ class coordonnees2(GraphScene):
         self.wait()
         x=5
         y=-1
-        labelO=TexMobject("M","(",str(x),";",str(y),")")
+        labelO=TexMobject("M","(",str(x),"{;}",str(y),")")
         parentheses=VGroup(labelO[1],labelO[3],labelO[5])
         labelO[2].set_color(YELLOW)
         labelO[4].set_color(YELLOW)
@@ -215,7 +270,7 @@ class coordonnees2(GraphScene):
         self.wait()
         x=5
         y=-1
-        labelN=TexMobject("M","(",str(x),";",str(y),")")
+        labelN=TexMobject("M","(",str(x),"{;}",str(y),")")
         labelN[2].set_color(YELLOW)
         labelN[4].set_color(YELLOW)
         N=DotCross(self,x,y)
@@ -238,10 +293,10 @@ class coordonnees2(GraphScene):
             ReplacementTransform(ordO,ordN),
             ReplacementTransform(absO,absN)
             )
-        self.wait()
+        #self.wait()
         x=5
         y=0
-        labelO=TexMobject("M","(",str(x),";",str(y),")")
+        labelO=TexMobject("M","(",str(x),"{;}",str(y),")")
         parentheses=VGroup(labelO[1],labelO[3],labelO[5])
         labelO[2].set_color(YELLOW)
         labelO[4].set_color(YELLOW)
@@ -269,7 +324,7 @@ class coordonnees2(GraphScene):
         self.wait()
         x=5
         y=1
-        labelN=TexMobject("M","(",str(x),";",str(y),")")
+        labelN=TexMobject("M","(",str(x),"{;}",str(y),")")
         labelN[2].set_color(YELLOW)
         labelN[4].set_color(YELLOW)
         N=DotCross(self,x,y)
@@ -295,7 +350,7 @@ class coordonnees2(GraphScene):
         self.wait()
         x=5
         y=3
-        labelO=TexMobject("M","(",str(x),";",str(y),")")
+        labelO=TexMobject("M","(",str(x),"{;}",str(y),")")
         parentheses=VGroup(labelO[1],labelO[3],labelO[5])
         labelO[2].set_color(YELLOW)
         labelO[4].set_color(YELLOW)
@@ -322,7 +377,7 @@ class coordonnees2(GraphScene):
         self.wait()
         x=2
         y=3
-        labelN=TexMobject("M","(",str(x),";",str(y),")")
+        labelN=TexMobject("M","(",str(x),"{;}",str(y),")")
         labelN[2].set_color(YELLOW)
         labelN[4].set_color(YELLOW)
         N=DotCross(self,x,y)
@@ -348,7 +403,7 @@ class coordonnees2(GraphScene):
         self.wait()
         x=0
         y=3
-        labelO=TexMobject("M","(",str(x),";",str(y),")")
+        labelO=TexMobject("M","(",str(x),"{;}",str(y),")")
         parentheses=VGroup(labelO[1],labelO[3],labelO[5])
         labelO[2].set_color(YELLOW)
         labelO[4].set_color(YELLOW)
@@ -376,7 +431,7 @@ class coordonnees2(GraphScene):
         self.wait()
         x=0
         y=2
-        labelN=TexMobject("M","(",str(x),";",str(y),")")
+        labelN=TexMobject("M","(",str(x),"{;}",str(y),")")
         labelN[2].set_color(YELLOW)
         labelN[4].set_color(YELLOW)
         N=DotCross(self,x,y)
@@ -424,7 +479,23 @@ class coordonnees2(GraphScene):
             ReplacementTransform(NyN,OyO),
             )
         self.remove(absO,ordO)
-        self.wait()
+        A=self.coords_to_point(-3,-2)
+        B=self.coords_to_point(0,0)
+        fleche=CurvedArrow(A,B)
+        textorigin=TextMobject("Origine").next_to(A,LEFT,SMALL_BUFF)
+        coordOrigin=TexMobject("O(0{;}0)").next_to(textorigin,BOTTOM,buff=0.01)
+        A=self.coords_to_point(0,4)
+        B=self.coords_to_point(5,0)
+        textaxex=TextMobject("Axe des ordonnées").next_to(A,LEFT,SMALL_BUFF)
+        textaxey=TextMobject("Axe des abscisses").next_to(B,DOWN,SMALL_BUFF)
+        A=self.coords_to_point(3,2.5)
+        titre1=TextMobject("Repérage").next_to(A)
+        titre2=TextMobject("dans le plan").next_to(titre1,BOTTOM,buff=0.01)
+        titre=VGroup(titre1,titre2)
+        cadre=SurroundingRectangle(titre, buff = .1).set_color(RED)
+        self.play(Write(fleche),Write(textorigin),Write(coordOrigin),Write(textaxex),Write(textaxey),Write(titre),ShowCreation(cadre))
+        self.wait(3)
+
 
 
 class coordonnees1(GraphScene):
