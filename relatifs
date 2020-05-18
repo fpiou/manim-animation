@@ -1,0 +1,945 @@
+#!/usr/bin/env python
+
+from manimlib.imports import *
+from decimal import *
+
+# To watch one of these scenes, run the following:
+# cd C:\Users\User\Documents\MEGA\MEGAsync\COURS\preparation annee 2017\manim
+# py -m manim try1.py nomdelaclass -pl
+# Use the flat -l for a faster rendering at a lower
+# quality.
+# Use -s to skip to the end and just save the final frame
+# Use the -p to have the animation (or image, if -s was
+# used) pop up once done.
+# Use -n <number> to skip ahead to the n'th animation of a scene.
+# Use -r <number> to specify a resolution (for example, -r 1080
+# for a 1920x1080 video)
+
+class relatifs(GraphScene):
+    CONFIG = {
+        "x_min": -6,
+        "x_max": 6,
+        "x_axis_width": 9, # Largeur de l'axe des abscisses
+        # Ce qui fait que une unité sur l'axe x = 0.75*LEFT ou 0.75*RIGHT
+        "x_axis_label": "",
+        "y_min": -4,
+        "y_max": 4,
+        "y_axis_height": 6, # Hauteur de l'axe des ordonnées
+        # Ce qui fait que une unité sur l'axe y = 0.75*UP ou 0.75*DOWN
+        "y_axis_label": "",
+        "axes_color": BLACK, # En noir les axes deviennent invisibles
+        "graph_origin": 0 * DOWN + 0 * LEFT # Origine au centre
+    }
+    def construct(self):
+        n=8
+        trs=2*RIGHT
+        egalite=[[] for i in range(n)]
+        ##Liste des égalités à afficher
+        for i in range(n):
+            if i-3<0:
+                egalite[n-1-i].append(TexMobject("7","+","("+str(i-3)+")","=",str(i+4)))#0
+                egalite[n-1-i].append(TexMobject("("+str(i-3)+")","+","7","=",str(i+4)))
+                egalite[n-1-i].append(TexMobject("7","+","("+str(i-3)+")","=",str(i+4)))
+                egalite[n-1-i].append(TexMobject("7","+","("+str(i-3)+")","=",str(i+4)))
+                egalite[n-1-i].append(TexMobject("("+str(i-3)+")","+","7","=",str(i+4)))
+                egalite[n-1-i].append(TexMobject(str(i-3),"+","7","=",str(i+4)))#5
+                egalite[n-1-i].append(TexMobject(str(i-3),"=",str(i+4),"-","7"))
+                egalite[n-1-i].append(TexMobject(str(i-3),"+","7","=",str(i+4)))
+                egalite[n-1-i].append(TexMobject(str(i-3),"+","7","=",str(i+4)))
+                egalite[n-1-i].append(TexMobject(str(i-3),"=",str(i+4),"-","7"))
+                egalite[n-1-i].append(TexMobject(str(i-3),"+","7","=",str(i+4)))#10
+                egalite[n-1-i].append(TexMobject("7","+","("+str(i-3)+")","=",str(i+4)))
+                egalite[n-1-i].append(TexMobject("7","=",str(i+4),"-","("+str(i-3)+")"))
+                egalite[n-1-i].append(TexMobject("7","+","("+str(i-3)+")","=",str(i+4)))
+                egalite[n-1-i].append(TexMobject("7","{}",str(i-3),"=",str(i+4)))
+                egalite[n-1-i].append(TexMobject("7","+","("+str(i-3)+")","=",str(i+4)))#15
+                egalite[n-1-i].append(TexMobject("("+str(i-3)+")","+","7","=",str(i+4)))
+                egalite[n-1-i].append(TexMobject("7","=",str(i+4),"+",str(3-i)))
+                egalite[n-1-i].append(TexMobject("7","=",str(i+4),"-","("+str(i-3)+")"))
+                egalite[n-1-i].append(TexMobject(str(i+4),"-","("+str(i-3)+")","=","7"))
+                egalite[n-1-i].append(TexMobject(str(i+4),"-","("+str(i-3)+")","=",str(i+4),"+",str(3-i)))#20
+            elif i-3==0:
+                egalite[n-1-i].append(TexMobject("7","+",str(i-3),"=",str(i+4)))#0
+                egalite[n-1-i].append(TexMobject(str(i-3),"+","7","=",str(i+4)))
+                egalite[n-1-i].append(TexMobject("7","+",str(i-3),"=",str(i+4)))
+                egalite[n-1-i].append(TexMobject("7","+",str(i-3),"=",str(i+4)))
+                egalite[n-1-i].append(TexMobject(str(i-3),"+","7","=",str(i+4)))
+                egalite[n-1-i].append(TexMobject(str(i-3),"+","7","=",str(i+4)))#5
+                egalite[n-1-i].append(TexMobject(str(i-3),"=",str(i+4),"-","7"))
+                egalite[n-1-i].append(TexMobject(str(i-3),"+","7","=",str(i+4)))
+                egalite[n-1-i].append(TexMobject(str(i-3),"+","7","=",str(i+4)))
+                egalite[n-1-i].append(TexMobject(str(i-3),"=",str(i+4),"-","7"))
+                egalite[n-1-i].append(TexMobject(str(i-3),"+","7","=",str(i+4)))#10
+                egalite[n-1-i].append(TexMobject("7","+",str(i-3),"=",str(i+4)))
+                egalite[n-1-i].append(TexMobject("7","=",str(i+4),"-",str(i-3)))
+                egalite[n-1-i].append(TexMobject("7","+",str(i-3),"=",str(i+4)))
+                egalite[n-1-i].append(TexMobject("7","+",str(i-3),"=",str(i+4)))
+                egalite[n-1-i].append(TexMobject("7","+",str(i-3),"=",str(i+4)))#15
+                egalite[n-1-i].append(TexMobject(str(i-3),"+","7","=",str(i+4)))
+                egalite[n-1-i].append(TexMobject("7","=",str(i+4),"+",str(3-i)))
+                egalite[n-1-i].append(TexMobject("7","=",str(i+4),"-",str(i-3)))
+                egalite[n-1-i].append(TexMobject(str(i+4),"-",str(i-3),"=","7"))
+                egalite[n-1-i].append(TexMobject(str(i+4),"-",str(i-3),"=",str(i+4),"+",str(3-i)))#20
+            else:
+                egalite[n-1-i].append(TexMobject("7","+",str(i-3),"=",str(i+4)))#0
+                egalite[n-1-i].append(TexMobject(str(i-3),"+","7","=",str(i+4)))
+                egalite[n-1-i].append(TexMobject("7","+",str(i-3),"=",str(i+4)))
+                egalite[n-1-i].append(TexMobject("7","+",str(i-3),"=",str(i+4)))
+                egalite[n-1-i].append(TexMobject(str(i-3),"+","7","=",str(i+4)))
+                egalite[n-1-i].append(TexMobject(str(i-3),"+","7","=",str(i+4)))#5
+                egalite[n-1-i].append(TexMobject(str(i-3),"=",str(i+4),"-","7"))
+                egalite[n-1-i].append(TexMobject(str(i-3),"+","7","=",str(i+4)))
+                egalite[n-1-i].append(TexMobject(str(i-3),"+","7","=",str(i+4)))
+                egalite[n-1-i].append(TexMobject(str(i-3),"=",str(i+4),"-","7"))
+                egalite[n-1-i].append(TexMobject(str(i-3),"+","7","=",str(i+4)))#10
+                egalite[n-1-i].append(TexMobject("7","+",str(i-3),"=",str(i+4)))
+                egalite[n-1-i].append(TexMobject("7","=",str(i+4),"-",str(i-3)))
+                egalite[n-1-i].append(TexMobject("7","+",str(i-3),"=",str(i+4)))
+                egalite[n-1-i].append(TexMobject("7","+",str(i-3),"=",str(i+4)))
+                egalite[n-1-i].append(TexMobject("7","+",str(i-3),"=",str(i+4)))#15
+                egalite[n-1-i].append(TexMobject(str(i-3),"+","7","=",str(i+4)))
+                egalite[n-1-i].append(TexMobject("7","=",str(i+4),"+","("+str(3-i)+")"))
+                egalite[n-1-i].append(TexMobject("7","=",str(i+4),"-",str(i-3)))
+                egalite[n-1-i].append(TexMobject(str(i+4),"-",str(i-3),"=","7"))
+                egalite[n-1-i].append(TexMobject(str(i+4),"-",str(i-3),"=",str(i+4),"+","("+str(3-i)+")"))#20
+            egalite[n-1-i][0][2].set_color(YELLOW)
+            egalite[n-1-i][1][0].set_color(YELLOW)
+            egalite[n-1-i][2][2].set_color(YELLOW)
+            egalite[n-1-i][3][2].set_color(YELLOW)
+            egalite[n-1-i][4][0].set_color(YELLOW)
+            egalite[n-1-i][5][0].set_color(YELLOW)
+            egalite[n-1-i][6][0].set_color(YELLOW)
+            egalite[n-1-i][7][0].set_color(YELLOW)
+            egalite[n-1-i][8][0].set_color(YELLOW)
+            egalite[n-1-i][9][0].set_color(YELLOW)
+            egalite[n-1-i][10][0].set_color(YELLOW)
+            egalite[n-1-i][11][2].set_color(YELLOW)
+            egalite[n-1-i][12][4].set_color(YELLOW)
+            egalite[n-1-i][13][2].set_color(YELLOW)
+            egalite[n-1-i][14][2].set_color(YELLOW)
+            egalite[n-1-i][15][2].set_color(YELLOW)
+            egalite[n-1-i][16][0].set_color(YELLOW)
+            egalite[n-1-i][17][4].set_color(YELLOW)
+            egalite[n-1-i][18][4].set_color(YELLOW)
+            egalite[n-1-i][19][2].set_color(YELLOW)
+            egalite[n-1-i][20][2].set_color(YELLOW)
+            egalite[n-1-i][20][6].set_color(YELLOW)
+        #Rangement
+        for i in range(n):
+            for j in range(len(egalite[0])):
+                egalite[i][j].set_opacity(0)
+                egalite[i][j].shift(i*0.7*DOWN+trs)
+        ##On fait apparaître toutes les égalités une par une
+        egalites=VGroup()
+        for i in range(len(egalite[0])):
+            egalites.add(*[egalite[j][i] for j in range(8)])
+        for i in range(n):
+            self.play(egalite[i][0].set_opacity,1)
+            if i==0:
+                self.play(
+                    egalites.shift,0.7*UP,
+                    )
+            elif i==5:
+                self.play(
+                    egalites.shift,0.7*UP,
+                    )
+            else:
+                self.play(
+                    egalites.shift,0.7*UP,
+                    )
+            egalite[i][0].set_opacity(0.2)
+        egalite[7][0].set_opacity(1)
+        self.wait(2)
+        self.play(FadeOut(egalites))
+        self.wait(2)
+        ## Introduction des nombres relatifs
+        self.setup_axes(animate=False) #Pour configurer le repère
+        axex=Arrow( #Pour tracer une flèche
+            self.coords_to_point(-6,0), #origine
+            self.coords_to_point(6,0), #extrémité
+            buff=0 # écart avec les extrémités de la flèche
+            ).set_color(BLUE)
+        self.add(axex)
+        # Placer un point mobile
+        tick=Line( #Pour tracer une graduation
+            self.coords_to_point(6,0.2),
+            self.coords_to_point(6,-0.2)
+            ).set_color(YELLOW)
+        self.add(tick)
+        # Liste des abscisses mobiles
+        ValAbscisses=[Decimal('6')-Decimal('0.1')*Decimal(str(i)) for i in range(120)]
+        TexAbscisses=[TextMobject(r"\small\numprint{"+str(ValAbscisses[i])+"}") for i in range(120)]
+        # Liste des abscisses à afficher
+        ValAbsAfficher=[
+            Decimal('4.2'),
+            Decimal('5'),
+            Decimal('3.1'),
+            Decimal('1'),
+            Decimal('0'),
+            Decimal('-1'),
+            Decimal('-2'),
+            Decimal('-3.6'),
+            Decimal('-5.3')
+            ]
+        TexAbsAfficher=[
+            TextMobject(r"\small\numprint{4.2}").set_color(YELLOW),
+            TextMobject("\small$5$").set_color(YELLOW),
+            TextMobject(r"\small$\pi$").set_color(YELLOW),
+            TextMobject("\small$1$").set_color(YELLOW),
+            TextMobject("\small$0$").set_color(YELLOW),
+            TextMobject("\small$-1$").set_color(YELLOW),
+            TextMobject("\small$-2$").set_color(YELLOW),
+            TextMobject(r"\small$-\numprint{3.6}$").set_color(YELLOW),
+            TextMobject(r"\small$-\frac{16}{3}$").set_color(YELLOW)
+        ]
+        # Animation
+        graduations=[] #Pour les effacer ensuite
+        for i in range(120):
+            #Afficher l'abscisse mobile
+            self.add(TexAbscisses[i].move_to(tick).shift(0.4*UP))
+            #Déplacer le point mobile vers la gauche
+            self.play(
+                tick.shift,0.75*0.1*LEFT,
+                run_time=0.1
+                )
+            #Effacer l'abscisse mobile
+            self.remove(TexAbscisses[i])
+            #Pour les abscisses conservés à l'affichage
+            if ValAbscisses[i] in ValAbsAfficher:
+                #Conserver la graduation
+                graduations.append(tick.copy().shift(0.1*0.75*RIGHT))
+                self.add(graduations[-1])
+                #Afficher si besoin l'abscisse en-dessous de l'axe
+                self.add(TexAbsAfficher[ValAbsAfficher.index(ValAbscisses[i])].move_to(tick).shift(0.4*DOWN+0.1*0.75*RIGHT))
+        self.remove(tick)
+        self.wait()
+        self.play(*[FadeOut(TexAbsAfficher[i]) for i in [0,1,2,3,5,6,7,8]])
+        self.remove(*graduations)
+        self.add(graduations[4])
+        # Afficher le vocabulaire positif, négatif, neutre
+        positifs=Line(self.coords_to_point(0,0.2),self.coords_to_point(6,0.2))
+        negatifs=Line(self.coords_to_point(-6,0.2),self.coords_to_point(0,0.2))
+        brace1 = Brace(positifs, UP, buff = SMALL_BUFF)
+        brace2 = Brace(negatifs, UP, buff = SMALL_BUFF)
+        t1 = brace1.get_text("positifs")
+        t2 = brace2.get_text("négatifs")
+        self.play(
+            GrowFromCenter(brace1),
+            Write(t1)
+            )
+        self.wait()
+        self.play(
+            ReplacementTransform(brace1.copy(),brace2),
+            ReplacementTransform(t1.copy(),t2)
+        )
+        self.wait()
+        t3=TextMobject("neutre").shift(UP)
+        fleche=Arrow(t3.get_bottom(),TexAbsAfficher[4],buff=0.2)
+        self.play(FadeIn(fleche),Write(t3))
+        self.wait()
+        t4=TextMobject(r"\Large Nombres relatifs").shift(1.5*UP)
+        t5=t4.copy().to_edge(UL)
+        self.play(
+            *[FadeIn(i) for i in graduations],
+            *[FadeIn(i) for i in TexAbsAfficher],
+            ReplacementTransform(VGroup(brace1,brace2,fleche,t1,t2,t3),t4)
+            )
+        self.wait(2)
+        # Tout effacer
+        self.play(
+            *[FadeOut(i) for i in graduations],
+            *[FadeOut(i) for i in TexAbsAfficher],
+            FadeOut(axex),
+            Transform(t4,t5,path_arc=-np.pi)
+            )
+        self.play(
+            FadeIn(egalites))
+        self.wait(2)
+        #On retourne à la troisième égalité 7+2=9
+        egalite[2][0].set_opacity(1)
+        self.play(
+            egalites.shift,0.7*5*DOWN,
+            run_time=1
+            )
+        self.wait(2)
+        ##Commutativité
+        transformation1=[(0,2),(1,1),(2,0),(3,3),(4,4)]
+        #On transforme l'égalité surlignée
+        egalite[2][1].set_opacity(1) #L'égalité cible s'affiche...
+        self.remove(egalite[2][1]) #...mais on ne voit rien car on la fait disparaître
+        self.play(*[
+            ReplacementTransform(egalite[2][0][i],egalite[2][1][j])
+                for i,j in transformation1
+                ]
+            )
+        egalite[2][0].set_opacity(0) #On rend transparent une ancienne
+        self.wait()
+        #On revient en arrière
+        egalite[2][2].set_opacity(1) #L'égalité cible s'affiche...
+        self.remove(egalite[2][2]) #...mais on ne voit rien car on la fait disparaître
+        self.play(*[
+            ReplacementTransform(egalite[2][1][i],egalite[2][2][j])
+                for i,j in transformation1
+                ]
+            )
+        egalite[2][1].set_opacity(0) #On rend transparent une ancienne
+        self.wait(2)
+        egalite[2][2].set_opacity(0.2) #On rend moins visible pour la nouvelle
+        #On retourne à la dernière égalité 7+(-3)=4
+        egalite[7][0].set_opacity(1)
+        self.play(
+            egalites.shift,0.7*5*UP,
+            run_time=1
+            )
+        self.wait()
+        #On transforme l'égalité surlignée
+        egalite[7][1].set_opacity(1) #L'égalité cible s'affiche...
+        self.remove(egalite[7][1]) #...mais on ne voit rien car on la fait disparaître
+        self.play(*[
+            ReplacementTransform(egalite[7][0][i],egalite[7][1][j])
+                for i,j in transformation1
+                ]
+            )
+        egalite[7][0].set_opacity(0) #On rend transparent une ancienne
+        self.wait()
+        #Retour en arrière
+        egalite[7][2].set_opacity(1) #L'égalité cible s'affiche...
+        self.remove(egalite[7][2]) #...mais on ne voit rien car on la fait disparaître
+        self.play(*[
+            ReplacementTransform(egalite[7][1][i],egalite[7][2][j])
+                for i,j in transformation1
+                ]
+            )
+        egalite[7][1].set_opacity(0) #On rend transparent une ancienne
+        self.wait(2)
+        #Tous en même temps pour la commutativité
+        t6=TextMobject(r"$\rightarrow$ commutativité").to_edge(UL).shift(DOWN)
+        #On cache les anciens, on montre tous les nouveaux,
+        for i in range(n):
+            egalite[i][0].set_opacity(0)
+            egalite[i][1].set_opacity(0)
+            egalite[i][2].set_opacity(0)
+            egalite[i][3].set_opacity(1)
+        self.play(
+            egalites.shift,0.7*4*DOWN,
+            run_time=1
+            )
+        self.wait()
+        #On transforme tout le monde
+        transformations1=[]
+        for k in range(n):
+            for i in range(len(transformation1)):
+                transformations1.append((k,transformation1[i][0],transformation1[i][1]))
+        for i in range(n):
+            egalite[i][4].set_opacity(1) #L'égalité cible s'affiche...
+            self.remove(egalite[i][4]) #...mais on ne voit rien car on la fait disparaître
+        self.play(*[
+            ReplacementTransform(egalite[k][3][i],egalite[k][4][j])
+                for k,i,j in transformations1
+                ],
+            ReplacementTransform(t5.copy(),t6)
+            )
+        self.wait()
+        #Retour en arrière
+        for i in range(n):
+            egalite[i][13].set_opacity(1) #L'égalité cible s'affiche...
+            self.remove(egalite[i][13]) #...mais on ne voit rien car on la fait disparaître
+        self.play(*[
+            ReplacementTransform(egalite[k][4][i],egalite[k][13][j])
+                for k,i,j in transformations1
+                ]
+            )
+        self.wait(3)
+        self.play(t6.set_opacity,0.2)
+        ## Simplification
+        t7=TextMobject(r"$\rightarrow$ simplification").to_edge(UL).shift(2*DOWN)
+        for i in range(5):
+            egalite[i][13].set_opacity(0.2)
+        for i in range(n):
+            egalite[i][14].set_opacity(1) #L'égalité cible s'affiche...
+            self.remove(egalite[i][14]) #...mais on ne voit rien car on la fait disparaître
+        self.play(*[
+            ReplacementTransform(egalite[k][13],egalite[k][14])
+                for k in range(5,n)
+                ],
+            )
+        self.play(ReplacementTransform(t5.copy(),t7))
+        self.wait(2)
+        #Retour en arrière
+        for i in range(5,n):
+            egalite[i][15].set_opacity(1) #L'égalité cible s'affiche...
+            self.remove(egalite[i][15]) #...mais on ne voit rien car on la fait disparaître
+        self.play(*[
+            ReplacementTransform(egalite[k][14],egalite[k][15])
+                for k in range(5,n)
+                ]
+            )
+        self.wait(2)
+        for i in range(5):
+            egalite[i][13].set_opacity(0)
+            egalite[i][14].set_opacity(0)
+            egalite[i][15].set_opacity(0.2)
+        #Les parenthèses en début peuvent être omises
+        #Inverser les termes
+        for i in range(5,n):
+            egalite[i][16].set_opacity(1) #L'égalité cible s'affiche...
+            self.remove(egalite[i][16]) #...mais on ne voit rien car on la fait disparaître
+        for i in range(5):
+            egalite[i][16].set_opacity(0.2) # on grise le reste
+            self.remove(egalite[i][16])
+        self.play(*[
+            ReplacementTransform(egalite[k][15][i],egalite[k][16][j])
+                for k,i,j in transformations1
+                ]
+            )
+        self.wait()
+        #Oter les parenthèses
+        for i in range(5,n):
+            egalite[i][5].set_opacity(1)
+            self.remove(egalite[i][5])
+        for i in range(5):
+            egalite[i][5].set_opacity(0.2)
+            self.remove(egalite[i][5])
+        self.play(*[
+            ReplacementTransform(egalite[k][16],egalite[k][5])
+                for k,i,j in transformations1
+                ]
+            )
+        self.wait(2)
+        self.play(t7.set_opacity,0.2)
+        ## Soustractions
+        self.play(
+            VGroup(*[ # Mettre en avant les 5 premiers
+                egalite[i][5] for i in range(5)
+                    ]
+                ).set_opacity,1,
+            VGroup(*[ # Mettre en arrière-plan les 4 derniers
+                egalite[i][5] for i in range(5,n)
+                    ]
+                ).set_opacity,0.2
+            )
+        t8=TextMobject(r"$\rightarrow$ soustraction").to_edge(UL).shift(3*DOWN)
+        self.play(ReplacementTransform(t5.copy(),t8))
+        transformation2=[(0,0),(1,3),(2,4),(3,1),(4,2)]
+        transformations2=[]
+        for k in range(5):
+            for i in range(len(transformation2)):
+                transformations2.append((k,transformation2[i][0],transformation2[i][1]))
+        for i in range(5):
+            egalite[i][6].set_opacity(1)
+            egalite[i][6].shift(RIGHT)
+            self.remove(egalite[i][6])
+        self.play(*[
+            ReplacementTransform(egalite[k][5][i],egalite[k][6][j])
+                for k,i,j in transformations2
+                ]
+            )
+        self.wait(2)
+        #Retour en arrière
+        for i in range(5):
+            egalite[i][7].set_opacity(1)
+            self.remove(egalite[i][7])
+        self.play(*[
+            ReplacementTransform(egalite[k][6][i],egalite[k][7][j])
+                for k,i,j in transformations2
+                ]
+            )
+        self.wait(2)
+        #Passage à la différence pour les nombres négatifs
+        self.play(
+            VGroup(*[ # Mettre en arrière les 5 premiers
+                egalite[i][7] for i in range(5)
+                    ]
+                ).set_opacity,0.2,
+            VGroup(*[ # Mettre en avant les 4 derniers
+                egalite[i][5] for i in range(5,n)
+                    ]
+                ).set_opacity,1
+            )
+        transformations2=[]
+        for k in range(5,n):
+            for i in range(len(transformation2)):
+                transformations2.append((k,transformation2[i][0],transformation2[i][1]))
+        for i in range(5,n):
+            egalite[i][6].set_opacity(1)
+            egalite[i][6].shift(RIGHT)
+            self.remove(egalite[i][6])
+        self.play(*[
+            ReplacementTransform(egalite[k][5][i],egalite[k][6][j])
+                for k,i,j in transformations2
+                ]
+            )
+        self.wait(2)
+        #Retour en arrière pour les nombres négatifs
+        for i in range(5,n):
+            egalite[i][7].set_opacity(1)
+            self.remove(egalite[i][7])
+        self.play(*[
+            ReplacementTransform(egalite[k][6][i],egalite[k][7][j])
+                for k,i,j in transformations2
+                ]
+            )
+        self.wait(2)
+        ## On schématise à partir d'un exemple avec un résultat positif
+        for i in range(n):
+            for j in range(len(egalite[0])):
+                egalite[i][j].set_opacity(0)
+        for i in range(n):
+            egalite[i][7].set_opacity(0.2)
+        self.play(egalite[2][7].set_opacity,1)
+        self.play(
+            egalites.shift,2.1*DOWN,
+            )
+        self.wait()
+        # Flèche sens direct
+        egalite_c=egalite[2][7].copy()
+        self.add(egalite_c)
+        addition=TextMobject("addition").move_to(egalite_c).shift(0.7*DOWN)
+        soustraction=TextMobject("soustraction").move_to(egalite_c).shift(0.7*UP)
+        self.play(Write(addition))
+        for i in range(n):
+            self.remove(egalite[i][7])
+        flechedirecte=CurvedArrow(
+            egalite_c[0].get_top(),
+            egalite_c[4].get_top(),
+            buff=0.2,
+            angle=-TAU/4
+            )
+        fld=TexMobject("+","7").move_to(flechedirecte.get_top()).shift(0.4*UP)
+        self.play(
+            ReplacementTransform(
+                egalite_c[3],
+                flechedirecte
+                ),
+            ReplacementTransform(
+                egalite_c[1],
+                fld[0]
+                ),
+            ReplacementTransform(
+                egalite_c[2],
+                fld[1]
+                )
+            )
+        self.wait(2)
+        # En arrière
+        self.play(
+            ReplacementTransform(
+                flechedirecte,
+                egalite[2][7][3]
+                ),
+            ReplacementTransform(
+                fld[0],
+                egalite[2][7][1]
+                ),
+            ReplacementTransform(
+                fld[1],
+                egalite[2][7][2]
+                )
+            )
+        self.wait(2)
+        self.play(FadeOut(addition))
+        # Flèche sens inverse
+        self.remove(*[i for i in egalite_c])
+        egalite_c=egalite[2][7].copy()
+        self.add(egalite_c)
+        self.remove(*[i for i in egalite[2][7]])
+        flecheinverse=CurvedArrow(
+            egalite_c[4].get_bottom(),
+            egalite_c[0].get_bottom(),
+            buff=0.2,
+            angle=-TAU/4
+            )
+        fli=TexMobject("-","7").move_to(flecheinverse.get_bottom()).shift(0.4*DOWN)
+        self.play(
+            ReplacementTransform(
+                egalite_c[3],
+                flecheinverse
+                ),
+            ReplacementTransform(
+                egalite_c[1],
+                fli[0]
+                ),
+            ReplacementTransform(
+                egalite_c[2],
+                fli[1]
+                )
+            )
+        self.play(Write(soustraction))
+        self.wait(2)
+        # On passe à la soustraction
+        self.remove(egalite_c[0],egalite_c[4])
+        egalite_diff=TexMobject("2","=","9","-","7").shift(RIGHT+0.7*DOWN+trs)
+        egalite_diff[0].set_color(YELLOW)
+        self.play(
+            ReplacementTransform(
+                flecheinverse,
+                egalite_diff[1]
+                ),
+            ReplacementTransform(
+                fli[0],
+                egalite_diff[3]
+                ),
+            ReplacementTransform(
+                fli[1],
+                egalite_diff[4]
+                ),
+            ReplacementTransform(
+                egalite_c[0],
+                egalite_diff[0]
+                ),
+            ReplacementTransform(
+                egalite_c[4],
+                egalite_diff[2]
+                ),
+            soustraction.shift,RIGHT
+            )
+        self.wait(2)
+        self.play(*[
+            FadeOut(i) for i in egalite_diff
+                ],
+            FadeOut(soustraction),
+            t8.set_opacity,0.2
+            )
+        # On fait tourner
+        egalite_c=egalite[2][7].copy()
+        self.play(
+            egalite_c[0].set_opacity,2,
+            egalite_c[4].set_opacity,2
+            )
+        plussept=TexMobject("+7").move_to(egalite_c[0].get_top()).shift(0.4*UP)
+        moinssept=TexMobject("-7").move_to(egalite_c[4].get_bottom())
+        self.play(plussept.move_to,egalite_c[4].get_top(),path_arc=-np.pi,run_time=2)
+        self.play(ReplacementTransform(plussept,moinssept))
+        self.play(moinssept.move_to,egalite_c[0].get_bottom(),path_arc=-np.pi,run_time=2)
+        plussept=TexMobject("+7").move_to(egalite_c[0].get_top())
+        self.play(ReplacementTransform(moinssept,plussept))
+        moinssept=TexMobject("-7").move_to(egalite_c[4].get_bottom())
+        flechedirecte=CurvedArrow(
+            egalite_c[0].get_top(),
+            egalite_c[4].get_top(),
+            buff=0.2,
+            angle=-TAU/4
+            )
+        fld=TexMobject("+7").move_to(flechedirecte.get_top()).shift(0.4*UP)
+        flecheinverse=CurvedArrow(
+            egalite_c[4].get_bottom(),
+            egalite_c[0].get_bottom(),
+            buff=0.2,
+            angle=-TAU/4
+            )
+        fli=TexMobject("-7").move_to(flecheinverse.get_bottom()).shift(0.4*DOWN)
+        self.play(
+            Write(flechedirecte),
+            Write(flecheinverse),
+            ReplacementTransform(plussept,fld,path_arc=-0.5*np.pi),
+            ReplacementTransform(moinssept,fli,path_arc=-0.5*np.pi),
+            run_time=2
+            )
+        self.play(
+            FadeOut(flechedirecte),
+            FadeOut(flecheinverse),
+            FadeOut(egalite_c[4]),
+            FadeOut(egalite_c[0])
+            )
+        opposes=TextMobject("opposés").shift(0.7*DOWN+trs)
+        self.play(Write(opposes))
+        self.wait()
+        t9=TextMobject(r"$\rightarrow$ opposés").to_edge(UL).shift(4*DOWN)
+        self.play(
+            ReplacementTransform(opposes,t9),
+            fld.move_to,egalite_c[0],
+            fli.move_to,egalite_c[4],
+            path_arc=-0.5*np.pi,
+            )
+        self.wait()
+        zero=TexMobject("0").shift(0.7*DOWN+trs)
+        sum_opposes=TexMobject("7","+","(-7)").shift(0.7*DOWN+trs)
+        self.play(
+            ReplacementTransform(fld,sum_opposes[0]),
+            ReplacementTransform(fli,sum_opposes[2]),
+            Write(sum_opposes[1])
+            )
+        self.wait(2)
+        self.play(
+            ReplacementTransform(sum_opposes,zero)
+            )
+        self.play(
+            FadeOut(zero),
+            run_time=3
+            )
+        ## Idem avec un résultat négatif
+        for i in range(n):
+            for j in range(len(egalite[0])):
+                egalite[i][j].set_opacity(0)
+        for i in range(n):
+            egalite[i][7].set_opacity(0.2)
+        self.play(egalite[7][7].set_opacity,1)
+        self.play(
+            egalites.shift,3.5*UP,
+            )
+        self.wait()
+        # Flèche sens direct
+        egalite_c=egalite[7][7].copy()
+        self.add(egalite_c)
+        addition=TextMobject("addition").move_to(egalite_c).shift(0.7*DOWN)
+        soustraction=TextMobject("soustraction").move_to(egalite_c).shift(0.7*UP)
+        self.play(Write(addition))
+        for i in range(n):
+            self.remove(egalite[i][7])
+        flechedirecte=CurvedArrow(
+            egalite_c[0].get_top(),
+            egalite_c[4].get_top(),
+            buff=0.2,
+            angle=-TAU/4
+            )
+        fld=TexMobject("+","7").move_to(flechedirecte.get_top()).shift(0.4*UP)
+        self.play(
+            ReplacementTransform(
+                egalite_c[3],
+                flechedirecte
+                ),
+            ReplacementTransform(
+                egalite_c[1],
+                fld[0]
+                ),
+            ReplacementTransform(
+                egalite_c[2],
+                fld[1]
+                )
+            )
+        self.wait(2)
+        # En arrière
+        self.play(
+            ReplacementTransform(
+                flechedirecte,
+                egalite[7][7][3]
+                ),
+            ReplacementTransform(
+                fld[0],
+                egalite[7][7][1]
+                ),
+            ReplacementTransform(
+                fld[1],
+                egalite[7][7][2]
+                )
+            )
+        self.wait(2)
+        self.play(FadeOut(addition))
+        # Flèche sens inverse
+        self.remove(*[i for i in egalite_c])
+        egalite_c=egalite[7][7].copy()
+        self.add(egalite_c)
+        self.remove(*[i for i in egalite[7][7]])
+        flecheinverse=CurvedArrow(
+            egalite_c[4].get_bottom(),
+            egalite_c[0].get_bottom(),
+            buff=0.2,
+            angle=-TAU/4
+            )
+        fli=TexMobject("-","7").move_to(flecheinverse.get_bottom()).shift(0.4*DOWN)
+        self.play(
+            ReplacementTransform(
+                egalite_c[3],
+                flecheinverse
+                ),
+            ReplacementTransform(
+                egalite_c[1],
+                fli[0]
+                ),
+            ReplacementTransform(
+                egalite_c[2],
+                fli[1]
+                )
+            )
+        self.play(Write(soustraction))
+        self.wait(2)
+        # On passe à la soustraction
+        self.remove(egalite_c[0],egalite_c[4])
+        egalite_diff=TexMobject("-3","=","4","-","7").shift(RIGHT+0.7*DOWN+trs)
+        egalite_diff[0].set_color(YELLOW)
+        self.play(
+            ReplacementTransform(
+                flecheinverse,
+                egalite_diff[1]
+                ),
+            ReplacementTransform(
+                fli[0],
+                egalite_diff[3]
+                ),
+            ReplacementTransform(
+                fli[1],
+                egalite_diff[4]
+                ),
+            ReplacementTransform(
+                egalite_c[0],
+                egalite_diff[0]
+                ),
+            ReplacementTransform(
+                egalite_c[4],
+                egalite_diff[2]
+                ),
+            soustraction.shift,RIGHT
+            )
+        self.wait(2)
+        self.play(*[
+            FadeOut(i) for i in egalite_diff
+                ],
+            FadeOut(soustraction)
+            )
+        self.wait(2)
+        for i in range(n):
+            for j in range(len(egalite[0])):
+                egalite[i][j].set_opacity(0)
+        for i in range(n):
+            egalite[i][7].set_opacity(1)
+        self.play(
+            egalites.shift,1.4*DOWN,
+            )
+        self.wait()
+        self.play(t9.set_opacity,0.2)
+        #Tous ensemble pour la différence
+        for i in range(n):
+            egalite[i][6].set_opacity(0)
+            egalite[i][7].set_opacity(0)
+            egalite[i][8].set_opacity(1)
+        for i in range(n):
+            egalite[i][9].set_opacity(1)
+            egalite[i][9].shift(RIGHT)
+            self.remove(egalite[i][9])
+        #On transforme tout le monde
+        transformations2=[]
+        for k in range(n):
+            for i in range(len(transformation2)):
+                transformations2.append((k,transformation2[i][0],transformation2[i][1]))
+        self.play(*[
+            ReplacementTransform(egalite[k][8][i],egalite[k][9][j])
+                for k,i,j in transformations2
+                ]
+            )
+        self.wait(2)
+        #Retour en arrière
+        for i in range(n):
+            egalite[i][10].set_opacity(1)
+            self.remove(egalite[i][10])
+        self.play(*[
+            ReplacementTransform(egalite[k][9][i],egalite[k][10][j])
+                for k,i,j in transformations2
+                ]
+            )
+        self.wait(2)
+        ##Revenir au début à 7+(-3)=4 puis à 7=4-(-3)
+        for i in range(n):
+            egalite[i][11].set_opacity(1)
+            self.remove(egalite[i][11])
+        self.play(*[
+            ReplacementTransform(egalite[k][10][i],egalite[k][11][j])
+                for k,i,j in transformations1
+                ]
+            )
+        self.wait(2)
+        for i in range(n):
+            egalite[i][12].set_opacity(1)
+            egalite[i][12].shift(RIGHT)
+            self.remove(egalite[i][12])
+        self.play(*[
+            ReplacementTransform(egalite[k][11][i],egalite[k][12][j])
+                for k,i,j in transformations2
+                ]
+            )
+        self.wait(2)
+        ##Ajouter l'opposé
+        t10=TextMobject(r"$\rightarrow$ ajouter l'opposé").to_edge(UL).shift(5*DOWN)
+        #- en +(-
+        transformation3=[(0,0),(1,1),(2,2),(3,3),(4,4)]
+        transformations3=[]
+        for k in range(5):
+            for i in range(len(transformation3)):
+                transformations3.append((k,transformation3[i][0],transformation3[i][1]))
+        for i in range(n):
+            egalite[i][17].set_opacity(1)
+            egalite[i][17].shift(RIGHT)
+            self.remove(egalite[i][17])
+        self.play(
+            VGroup(*[egalite[i][12] for i in range(5,n)]).set_opacity,0.2
+            )
+        self.play(*[
+            ReplacementTransform(egalite[k][12][i],egalite[k][17][j])
+                for k,i,j in transformations3
+                ],
+            Write(t10)
+            )
+        self.wait(2)
+        #Retour en arrière
+        for i in range(n):
+            egalite[i][18].set_opacity(1)
+            egalite[i][18].shift(RIGHT)
+            self.remove(egalite[i][18])
+        self.play(*[
+            ReplacementTransform(egalite[k][17][i],egalite[k][18][j])
+                for k,i,j in transformations3
+                ]
+            )
+        self.wait(2)
+        #-(- en +
+        self.play(
+            VGroup(*[egalite[i][12] for i in range(5,n)]).set_opacity,1
+            )
+        self.play(
+            VGroup(*[egalite[i][18] for i in range(5)]).set_opacity,0.2
+            )
+        transformations3=[]
+        for k in range(5,n):
+            for i in range(len(transformation3)):
+                transformations3.append((k,transformation3[i][0],transformation3[i][1]))
+        self.play(*[
+            ReplacementTransform(egalite[k][12][i],egalite[k][17][j])
+                for k,i,j in transformations3
+                ]
+            )
+        self.wait(2)
+        #Retour en arrière
+        self.play(*[
+            ReplacementTransform(egalite[k][17][i],egalite[k][18][j])
+                for k,i,j in transformations3
+                ]
+            )
+        self.wait(2)
+        ##Flip de l'égalité pour le final
+        transformation4=[(0,4),(1,3),(2,0),(3,1),(4,2)]
+        transformations4=[]
+        for k in range(n):
+            for i in range(len(transformation4)):
+                transformations4.append((k,transformation4[i][0],transformation4[i][1]))
+        for i in range(n):
+            egalite[i][19].set_opacity(1)
+            self.remove(egalite[i][19])
+        self.play(*[
+            ReplacementTransform(egalite[k][18][i],egalite[k][19][j])
+                for k,i,j in transformations4
+                ]
+            )
+        self.wait(2)
+        transformation5=[(0,0),(1,1),(2,2),(3,3)]
+        transformation6=[(0,4),(1,5),(2,6)]
+        transformations5=[]
+        transformations6=[]
+        for k in range(n):
+            for i in range(len(transformation5)):
+                transformations5.append((k,transformation5[i][0],transformation5[i][1]))
+        for k in range(n):
+            for i in range(len(transformation6)):
+                transformations6.append((k,transformation6[i][0],transformation6[i][1]))
+        for i in range(n):
+            egalite[i][20].set_opacity(1).shift(RIGHT)
+            self.remove(egalite[i][20])
+        self.play(VGroup(*[egalite[i][19][4] for i in range(n)]).set_opacity,0)
+        self.play(*[
+            FadeOut(egalite[i][19])
+                for i in range(n)
+                ],
+            *[
+            FadeIn(egalite[i][20])
+                for i in range(n)
+                ]
+            )
+        self.wait(2)
